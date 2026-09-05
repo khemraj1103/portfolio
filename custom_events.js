@@ -1,486 +1,109 @@
 /**
- * Portfolio Interaction Layer
- *
- * Handles:
- * - Sticky navigation
- * - Mobile navigation
- * - Scroll reveal
- * - Animated counters
- * - Smooth navigation
- * - Hero mouse movement
+ * KT Architecture Portfolio - Custom Events
+ * Handles: Page Loading, Smooth Reveal Transitions, Navigation Highlighting.
  */
 
-document.addEventListener("DOMContentLoaded", () => {
+// Use immediately invoked function expression (IIFE) to avoid global scope pollution.
+(() => {
+    "use strict";
 
-    /* =====================================================
-       ELEMENTS
-    ===================================================== */
+    // Technical Optimization: Run scripts only after DOM is parsed but before external resources load.
+    document.addEventListener("DOMContentLoaded", initKTApp);
 
-    const header =
-        document.getElementById("siteHeader");
+    function initKTApp() {
+        console.log("KT Architect UI Initialized...");
 
-    const menuToggle =
-        document.getElementById("menuToggle");
+        // 1. Loader Handling (Ensures smooth first paint)
+        handlePageLoad();
 
-    const navigation =
-        document.getElementById("navigation");
+        // 2. Initializing Intersection Observer for Scroll Reveals (Trendy UI component)
+        initScrollReveals();
 
-    const revealElements =
-        document.querySelectorAll(".reveal");
-
-    const counters =
-        document.querySelectorAll("[data-counter]");
-
-    const heroVisual =
-        document.querySelector(".hero-visual");
-
-
-    /* =====================================================
-       STICKY HEADER
-    ===================================================== */
-
-    const updateHeader = () => {
-
-        if (!header) {
-            return;
-        }
-
-        if (window.scrollY > 40) {
-            header.classList.add("scrolled");
-        } else {
-            header.classList.remove("scrolled");
-        }
-
-    };
-
-    window.addEventListener(
-        "scroll",
-        updateHeader,
-        {
-            passive: true
-        }
-    );
-
-    updateHeader();
-
-
-    /* =====================================================
-       MOBILE MENU
-    ===================================================== */
-
-    if (menuToggle && navigation) {
-
-        menuToggle.addEventListener(
-            "click",
-            () => {
-
-                const open =
-                    navigation.classList.toggle(
-                        "active"
-                    );
-
-                menuToggle.setAttribute(
-                    "aria-expanded",
-                    open ? "true" : "false"
-                );
-
-            }
-        );
-
-
-        navigation
-            .querySelectorAll("a")
-            .forEach(link => {
-
-                link.addEventListener(
-                    "click",
-                    () => {
-
-                        navigation.classList.remove(
-                            "active"
-                        );
-
-                        menuToggle.setAttribute(
-                            "aria-expanded",
-                            "false"
-                        );
-
-                    }
-                );
-
-            });
-
+        // 3. Dynamic Active Navigation Highlighting
+        initNavSpy();
     }
 
-
-    /* =====================================================
-       SCROLL REVEAL
-    ===================================================== */
-
-    if (
-        "IntersectionObserver" in window
-    ) {
-
-        const revealObserver =
-            new IntersectionObserver(
-                entries => {
-
-                    entries.forEach(
-                        entry => {
-
-                            if (
-                                !entry.isIntersecting
-                            ) {
-                                return;
-                            }
-
-                            const element =
-                                entry.target;
-
-                            const delay =
-                                parseInt(
-                                    element.dataset.delay ||
-                                    "0",
-                                    10
-                                );
-
-                            setTimeout(
-                                () => {
-
-                                    element.classList.add(
-                                        "visible"
-                                    );
-
-                                },
-                                delay
-                            );
-
-                            revealObserver.unobserve(
-                                element
-                            );
-
-                        }
-                    );
-
-                },
-                {
-                    threshold: 0.12,
-                    rootMargin: "0px 0px -40px 0px"
-                }
-            );
-
-
-        revealElements.forEach(
-            element => {
-
-                revealObserver.observe(
-                    element
-                );
-
-            }
-        );
-
-    } else {
-
-        revealElements.forEach(
-            element => {
-
-                element.classList.add(
-                    "visible"
-                );
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       SMOOTH INTERNAL LINKS
-    ===================================================== */
-
-    document
-        .querySelectorAll(
-            'a[href^="#"]'
-        )
-        .forEach(link => {
-
-            link.addEventListener(
-                "click",
-                event => {
-
-                    const targetId =
-                        link.getAttribute(
-                            "href"
-                        );
-
-                    if (
-                        !targetId ||
-                        targetId === "#"
-                    ) {
-                        return;
-                    }
-
-                    const target =
-                        document.querySelector(
-                            targetId
-                        );
-
-                    if (!target) {
-                        return;
-                    }
-
-                    event.preventDefault();
-
-                    target.scrollIntoView({
-                        behavior: "smooth",
-                        block: "start"
-                    });
-
-                }
-            );
-
+    /**
+     * Remove loading class and reveal the site smoothly.
+     */
+    function handlePageLoad() {
+        const body = document.body;
+        
+        // Use requestAnimationFrame for precise browser timing optimization.
+        requestAnimationFrame(() => {
+            // Give a tiny buffer for browser paint, then show site.
+            setTimeout(() => {
+                body.classList.remove('loading');
+            }, 300); // Technical Buffer for heavy assets paint.
         });
+    }
 
+    /**
+     * Professional Scroll Reveal functionality using native IntersectionObserver API.
+     * Better performance than listening to 'scroll' events.
+     */
+    function initScrollReveals() {
+        // Target elements that should be professionally revealed on scroll.
+        const revealElements = document.querySelectorAll(
+            '.expertise-card, .solution-item, .section-title, .hero-text-block'
+        );
 
-    /* =====================================================
-       COUNTER ANIMATION
-    ===================================================== */
-
-    const animateCounter =
-        element => {
-
-            const finalValue =
-                element.dataset.counter;
-
-            if (!finalValue) {
-                return;
-            }
-
-            const match =
-                finalValue.match(
-                    /^([\d.]+)(.*)$/
-                );
-
-            if (!match) {
-                return;
-            }
-
-            const target =
-                parseFloat(match[1]);
-
-            const suffix =
-                match[2];
-
-            const duration =
-                1300;
-
-            const start =
-                performance.now();
-
-
-            const update =
-                currentTime => {
-
-                    const progress =
-                        Math.min(
-                            (
-                                currentTime -
-                                start
-                            ) / duration,
-                            1
-                        );
-
-                    const eased =
-                        1 -
-                        Math.pow(
-                            1 - progress,
-                            3
-                        );
-
-                    const current =
-                        target * eased;
-
-
-                    if (
-                        target % 1 !== 0
-                    ) {
-
-                        element.textContent =
-                            current.toFixed(1) +
-                            suffix;
-
-                    } else {
-
-                        element.textContent =
-                            Math.floor(current) +
-                            suffix;
-
-                    }
-
-
-                    if (
-                        progress < 1
-                    ) {
-
-                        requestAnimationFrame(
-                            update
-                        );
-
-                    } else {
-
-                        element.textContent =
-                            finalValue;
-
-                    }
-
-                };
-
-
-            requestAnimationFrame(update);
-
+        const observerOptions = {
+            root: null, // use viewpoint
+            threshold: 0.15, // trigger when 15% visible
+            rootMargin: "0px 0px -50px 0px" // trigger slightly before it reaches the viewport
         };
 
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                // Technically Strong: Professional optimization only revealing once.
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    // Stop observing after reveal to conserve resources.
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
 
-    if (
-        "IntersectionObserver" in window
-    ) {
+        revealElements.forEach(el => {
+            // Set initial state via JS to allow no-JS fallback support in HTML.
+            el.classList.add('reveal-init');
+            revealObserver.observe(el);
+        });
+    }
 
-        const counterObserver =
-            new IntersectionObserver(
-                entries => {
+    /**
+     * Active Navigation Highlighting (Technical visibility for user experience).
+     */
+    function initNavSpy() {
+        const sections = document.querySelectorAll("main section");
+        const navLinks = document.querySelectorAll(".nav-links a:not(.btn-cta-small)");
 
-                    entries.forEach(
-                        entry => {
+        const spyOptions = {
+            root: null,
+            threshold: 0.5, // trigger when 50% section is in view
+            rootMargin: "-80px 0px 0px 0px" // Adjust for fixed header height
+        };
 
-                            if (
-                                !entry.isIntersecting
-                            ) {
-                                return;
-                            }
-
-                            animateCounter(
-                                entry.target
-                            );
-
-                            counterObserver.unobserve(
-                                entry.target
-                            );
-
+        const navSpyObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute("id");
+                    
+                    // Technical optimization: update UI only when necessary.
+                    navLinks.forEach(link => {
+                        link.classList.remove("active");
+                        if (link.getAttribute("href") === `#${id}`) {
+                            link.classList.add("active");
                         }
-                    );
-
-                },
-                {
-                    threshold: .7
+                    });
                 }
-            );
+            });
+        }, spyOptions);
 
-
-        counters.forEach(
-            counter => {
-
-                counterObserver.observe(
-                    counter
-                );
-
-            }
-        );
-
+        sections.forEach(section => {
+            navSpyObserver.observe(section);
+        });
     }
 
-
-    /* =====================================================
-       HERO PARALLAX
-    ===================================================== */
-
-    if (
-        heroVisual &&
-        window.matchMedia(
-            "(min-width: 900px)"
-        ).matches
-    ) {
-
-        let ticking = false;
-
-
-        document.addEventListener(
-            "mousemove",
-            event => {
-
-                if (ticking) {
-                    return;
-                }
-
-                ticking = true;
-
-
-                requestAnimationFrame(
-                    () => {
-
-                        const x =
-                            (
-                                window.innerWidth /
-                                2 -
-                                event.clientX
-                            ) / 100;
-
-                        const y =
-                            (
-                                window.innerHeight /
-                                2 -
-                                event.clientY
-                            ) / 120;
-
-
-                        heroVisual.style.transform =
-                            `translate3d(
-                                ${x}px,
-                                ${y}px,
-                                0
-                            )`;
-
-
-                        ticking = false;
-
-                    }
-                );
-
-            }
-        );
-
-    }
-
-
-    /* =====================================================
-       ESCAPE CLOSES MOBILE MENU
-    ===================================================== */
-
-    document.addEventListener(
-        "keydown",
-        event => {
-
-            if (
-                event.key === "Escape" &&
-                navigation
-            ) {
-
-                navigation.classList.remove(
-                    "active"
-                );
-
-                if (menuToggle) {
-
-                    menuToggle.setAttribute(
-                        "aria-expanded",
-                        "false"
-                    );
-
-                }
-
-            }
-
-        }
-    );
-
-});
+})();
