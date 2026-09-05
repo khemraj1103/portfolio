@@ -1,0 +1,192 @@
+/* ============================================================
+   CUBE PRELOADER — transparent/frosted overlay
+   ============================================================ */
+#page-preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  /* frosted glass — page behind is blurred, not solid dark */
+  background: rgba(10, 15, 30, 0.72);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  opacity: 1;
+  visibility: visible;
+  transition: opacity .5s cubic-bezier(.22,1,.36,1),
+              visibility .5s;
+}
+#page-preloader.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* ambient glow blobs behind the cube */
+#page-preloader::before,
+#page-preloader::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  animation: blobDrift 7s ease-in-out infinite alternate;
+}
+#page-preloader::before {
+  width: 320px; height: 320px;
+  background: radial-gradient(circle, rgba(13,148,136,.35) 0%, transparent 70%);
+  top: 15%; left: 15%;
+}
+#page-preloader::after {
+  width: 280px; height: 280px;
+  background: radial-gradient(circle, rgba(124,58,237,.28) 0%, transparent 70%);
+  bottom: 15%; right: 15%;
+  animation-delay: -3.5s;
+}
+@keyframes blobDrift {
+  from { transform: translate(0,0) scale(1); }
+  to   { transform: translate(20px,15px) scale(1.1); }
+}
+
+/* ============================================================
+   3-D CUBE — 100×100px, translateZ = 50px (exactly half)
+   perspective: 600px — large enough to show all 6 faces
+   ============================================================ */
+.cube-scene {
+  width: 100px;
+  height: 100px;
+  perspective: 600px;
+  perspective-origin: 50% 50%;
+  position: relative;
+  z-index: 1;
+}
+.cube {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: cubeRotate 4s linear infinite;
+}
+@keyframes cubeRotate {
+  0%   { transform: rotateX(  0deg) rotateY(  0deg); }
+  16%  { transform: rotateX(-90deg) rotateY(  0deg); }
+  33%  { transform: rotateX(-90deg) rotateY( 90deg); }
+  50%  { transform: rotateX(  0deg) rotateY(180deg); }
+  66%  { transform: rotateX( 90deg) rotateY(180deg); }
+  83%  { transform: rotateX( 90deg) rotateY(270deg); }
+  100% { transform: rotateX(  0deg) rotateY(360deg); }
+}
+
+/* ---- faces ---- */
+.cube-face {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1.5px solid rgba(255,255,255,.25);
+  backface-visibility: visible;
+}
+.cube-face svg {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,.35));
+}
+.cube-face span {
+  font-family: 'Roboto', monospace;
+  font-size: .54rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 1px 4px rgba(0,0,0,.5);
+}
+
+/* each face: translateZ = 50px (half of 100px) */
+.cube-face.front  { background: linear-gradient(135deg,#0d9488,#059669); transform: translateZ(50px); }
+.cube-face.back   { background: linear-gradient(135deg,#7c3aed,#6d28d9); transform: rotateY(180deg) translateZ(50px); }
+.cube-face.right  { background: linear-gradient(135deg,#1d4ed8,#2563eb); transform: rotateY(90deg)  translateZ(50px); }
+.cube-face.left   { background: linear-gradient(135deg,#0f766e,#0d9488); transform: rotateY(-90deg) translateZ(50px); }
+.cube-face.top    { background: linear-gradient(135deg,#6d28d9,#7c3aed); transform: rotateX(90deg)  translateZ(50px); }
+.cube-face.bottom { background: linear-gradient(135deg,#2563eb,#1d4ed8); transform: rotateX(-90deg) translateZ(50px); }
+
+/* ---- progress bar ---- */
+.preloader-bar-wrap {
+  width: 130px; height: 3px;
+  background: rgba(255,255,255,.12);
+  border-radius: 100px;
+  overflow: hidden;
+  position: relative; z-index: 1;
+}
+.preloader-bar {
+  height: 100%;
+  border-radius: 100px;
+  background: linear-gradient(90deg, #0d9488, #7c3aed, #1d4ed8);
+  width: 0;
+  animation: barFill 1.6s cubic-bezier(.4,0,.2,1) forwards;
+}
+@keyframes barFill { from { width: 0; } to { width: 100%; } }
+
+.preloader-label {
+  font-family: 'Roboto', monospace;
+  font-size: .58rem;
+  font-weight: 600;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  position: relative; z-index: 1;
+  animation: labelPulse 1.6s ease-in-out infinite;
+}
+@keyframes labelPulse { 0%,100% { opacity: .5; } 50% { opacity: 1; } }
+
+/* ============================================================
+   PAGE ENTRY SLIDE-IN
+   The new page starts hidden (off-screen) and slides in
+   WHILE the cube overlay is still visible on top.
+   The cube then fades out revealing the fully-arrived page.
+
+   Flow:
+     click → cube appears (transparent overlay on current page)
+     → navigate → new page loads hidden (cube still on top)
+     → page slides in from random direction (under the cube)
+     → cube fades out → page fully visible
+   ============================================================ */
+
+/* Body starts invisible — cube covers it */
+body {
+  opacity: 0;
+}
+/* JS adds .page-ready which triggers the slide */
+body.page-ready {
+  opacity: 1;
+}
+
+body.enter-top    { animation: slideInTop    .65s cubic-bezier(.22,1,.36,1) both; }
+body.enter-bottom { animation: slideInBottom .65s cubic-bezier(.22,1,.36,1) both; }
+body.enter-left   { animation: slideInLeft   .65s cubic-bezier(.22,1,.36,1) both; }
+body.enter-right  { animation: slideInRight  .65s cubic-bezier(.22,1,.36,1) both; }
+
+@keyframes slideInTop {
+  from { opacity: 0; transform: translateY(-80px) scale(.96); }
+  to   { opacity: 1; transform: translateY(0)     scale(1);   }
+}
+@keyframes slideInBottom {
+  from { opacity: 0; transform: translateY(80px)  scale(.96); }
+  to   { opacity: 1; transform: translateY(0)     scale(1);   }
+}
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-100px) scale(.96); }
+  to   { opacity: 1; transform: translateX(0)      scale(1);   }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(100px)  scale(.96); }
+  to   { opacity: 1; transform: translateX(0)      scale(1);   }
+}

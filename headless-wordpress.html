@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="shortcut icon" href="assets/icons/favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Headless WordPress | Khemraj Thakoor — React.js & GraphQL</title>
+<meta name="description" content="Headless WordPress with React.js frontend, GraphQL or REST API. Decoupled architecture for high-performance, scalable content delivery. Delivered for Tutopiya on AWS.">
+<link rel="canonical" href="https://khemrajthakoor.com/headless-wordpress.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="stylesheet" href="assets/css/preloader.css">
+<script src="assets/js/preloader.js"></script>
+<link rel="stylesheet" href="assets/css/animations.css">
+</head>
+<body data-page="services">
+<div id="site-nav"></div>
+<main>
+
+<section class="page-hero">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span><a href="services.html">Services</a><span>/</span><span>Headless WordPress</span></nav>
+    <div class="page-hero-eyebrow anim-scale-in">SERVICE</div>
+    <h1>Headless WordPress: Decoupled Architecture for High-Performance Delivery</h1>
+    <p class="hero-desc">WordPress as a content management backend with a React.js frontend consuming content via GraphQL or REST API — delivering fast, scalable and flexible web experiences.</p>
+    <div class="page-hero-actions anim-fade-up d3">
+      <a href="contact.html" class="btn btn-primary">Start a Project</a>
+      <a href="works.html" class="btn btn-outline">View Case Studies</a>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section>
+  <div class="container">
+    <div style="display:grid;grid-template-columns:3fr 2fr;gap:3rem;align-items:start">
+      <div>
+        <p class="label section-label">ARCHITECTURE</p>
+        <h2 class="section-title">How Headless WordPress Works</h2>
+        <p style="margin-bottom:1.5rem">In a headless architecture, WordPress handles content management while a separate React.js frontend consumes content via GraphQL or REST API. This decoupling enables faster frontends, greater flexibility and scalable deployment on modern infrastructure.</p>
+        <div class="grid-2" style="gap:1rem;margin-top:1.5rem">
+          <div class="card fade-up anim-fade-up stagger-child spotlight-card"><h3 style="font-size:.95rem;margin-bottom:.4rem">WordPress CMS Backend</h3><p style="font-size:.85rem">WordPress manages all content, users, media and custom post types. Editors use the familiar WordPress admin interface.</p></div>
+          <div class="card fade-up anim-fade-up stagger-child spotlight-card"><h3 style="font-size:.95rem;margin-bottom:.4rem">GraphQL API Layer</h3><p style="font-size:.85rem">Custom GraphQL endpoints expose WordPress content, CPTs and custom fields for efficient, typed data fetching by the frontend.</p></div>
+          <div class="card fade-up anim-fade-up stagger-child spotlight-card"><h3 style="font-size:.95rem;margin-bottom:.4rem">React.js Frontend</h3><p style="font-size:.85rem">A React.js application consumes the GraphQL API and renders fast, interactive user interfaces with full control over the frontend stack.</p></div>
+          <div class="card fade-up anim-fade-up stagger-child spotlight-card"><h3 style="font-size:.95rem;margin-bottom:.4rem">AWS Infrastructure</h3><p style="font-size:.85rem">Deployed on AWS EC2, S3 and CloudFront for reliable, scalable and zero-downtime production deployments.</p></div>
+        </div>
+      </div>
+      <div>
+        <div style="background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius);padding:1.5rem">
+          <h3 style="font-size:.95rem;margin-bottom:1rem">Headless Architecture Flow</h3>
+          <div style="display:flex;flex-direction:column;gap:.5rem">
+            <div style="background:var(--blue-light);border-radius:var(--radius-sm);padding:.85rem;text-align:center;font-family:var(--font-mono);font-size:.75rem;font-weight:700;color:var(--blue)">WORDPRESS CMS<br><span style="font-weight:400;color:var(--gray-600)">Content Management</span></div>
+            <div style="text-align:center;color:var(--gray-400);font-size:1.1rem">│</div>
+            <div style="background:var(--teal-light);border-radius:var(--radius-sm);padding:.85rem;text-align:center;font-family:var(--font-mono);font-size:.75rem;font-weight:700;color:var(--teal-dark)">REST API / GRAPHQL<br><span style="font-weight:400;color:var(--gray-600)">Data Layer</span></div>
+            <div style="text-align:center;color:var(--gray-400);font-size:1.1rem">↓</div>
+            <div style="background:var(--violet-light);border-radius:var(--radius-sm);padding:.85rem;text-align:center;font-family:var(--font-mono);font-size:.75rem;font-weight:700;color:var(--violet)">REACT.JS FRONTEND<br><span style="font-weight:400;color:var(--gray-600)">User Interface</span></div>
+            <div style="text-align:center;color:var(--gray-400);font-size:1.1rem">↓</div>
+            <div style="background:var(--green-light);border-radius:var(--radius-sm);padding:.85rem;text-align:center;font-family:var(--font-mono);font-size:.75rem;font-weight:700;color:var(--green)">AWS (EC2 + S3 + CloudFront)<br><span style="font-weight:400;color:var(--gray-600)">Scalable Deployment</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REAL PROJECT -->
+<section style="background:var(--gray-50)">
+  <div class="container">
+    <p class="label section-label">REAL PROJECT</p>
+    <h2 class="section-title">Tutopiya — Headless WordPress in Production</h2>
+    <div style="display:grid;grid-template-columns:3fr 2fr;gap:3rem;align-items:start">
+      <div>
+        <p style="margin-bottom:1rem">As Lead WordPress Developer at Tutopiya (EdTech SaaS, Singapore), I architected and maintained a production headless WordPress platform serving an international e-learning audience.</p>
+        <ul class="detail-list">
+          <li>Architected headless WordPress with React.js frontend and GraphQL API</li>
+          <li>Improved overall website performance by approximately 40%</li>
+          <li>Implemented server-side caching, database query optimization and asset optimization</li>
+          <li>Designed AWS infrastructure using EC2, S3 and CloudFront for zero-downtime deployments</li>
+          <li>Implemented WCAG 2.1-compliant frontend development</li>
+          <li>Integrated Twilio OTP authentication reducing spam registrations by 95%+</li>
+          <li>Integrated HubSpot CRM tracking workflows</li>
+          <li>Implemented Technical SEO including Schema.org markup, canonical URLs and XML sitemaps</li>
+        </ul>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:1rem">
+        <div style="display:flex;flex-wrap:wrap;gap:.75rem;margin-bottom:1.5rem">
+        <span class="result-badge">🚀 ~40% Performance Gain</span>
+        <span class="result-badge violet">🔒 95%+ Spam Reduction</span>
+      </div>
+      <div class="stat-box"><div class="num" style="font-size:2.5rem">~40%</div><div class="lbl">Performance Improvement</div></div>
+        <div class="stat-box"><div class="num" style="font-size:2.5rem">95%+</div><div class="lbl">Spam Reduction</div></div>
+        <div class="highlight-box">
+          <h3>Technologies Used</h3>
+          <div class="tech-pills" style="margin-top:.75rem">
+            <span class="tech-pill">WordPress</span><span class="tech-pill">React.js</span><span class="tech-pill">GraphQL</span><span class="tech-pill">AWS EC2</span><span class="tech-pill">S3</span><span class="tech-pill">CloudFront</span><span class="tech-pill">Twilio</span><span class="tech-pill">HubSpot</span><span class="tech-pill">WCAG 2.1</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-dark">
+  <div class="container">
+    <p class="label" style="color:var(--teal);margin-bottom:.75rem">HEADLESS WORDPRESS</p>
+    <h2>Ready to Build a High-Performance Headless WordPress Platform?</h2>
+    <p>Let's architect a decoupled WordPress solution with React.js and GraphQL for your business.</p>
+    <div class="cta-actions">
+      <a href="contact.html" class="btn btn-primary">Discuss Your Project</a>
+      <a href="services.html" class="btn btn-white">All Services</a>
+    </div>
+  </div>
+</section>
+</main>
+<div id="site-footer"></div>
+<script src="assets/js/shared.js"></script>
+</body>
+</html>

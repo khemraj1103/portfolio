@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg">
+  <link rel="shortcut icon" href="assets/icons/favicon.svg">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Technical Insights | Khemraj Thakoor — WordPress Developer Blog</title>
+<meta name="description" content="Technical articles on WordPress development, technical SEO, performance optimization, Core Web Vitals, headless WordPress and web engineering best practices.">
+<link rel="canonical" href="https://khemrajthakoor.com/insights.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Inter:wght@400;500;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/styles.css">
+<link rel="stylesheet" href="assets/css/preloader.css">
+<script src="assets/js/preloader.js"></script>
+<link rel="stylesheet" href="assets/css/animations.css">
+<style>
+.article-card{background:#fff;border:1px solid var(--gray-200);border-radius:var(--radius);overflow:hidden;transition:var(--transition)}
+.article-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.article-thumb{height:140px;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:.8rem;font-weight:700;color:#fff;letter-spacing:.08em;text-transform:uppercase;padding:1rem;text-align:center}
+.article-body{padding:1.25rem}
+.article-cat{font-family:var(--font-mono);font-size:.7rem;color:var(--teal);font-weight:600;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.4rem}
+.article-body h3{font-size:1rem;margin-bottom:.5rem}
+.article-body p{font-size:.85rem}
+.article-meta{display:flex;align-items:center;gap:1rem;margin-top:.75rem;font-family:var(--font-mono);font-size:.72rem;color:var(--gray-400)}
+.coming-soon{display:inline-flex;align-items:center;gap:.35rem;font-family:var(--font-mono);font-size:.7rem;font-weight:600;color:var(--gray-400);background:var(--gray-100);padding:.25rem .65rem;border-radius:100px;margin-top:.75rem}
+</style>
+</head>
+<body data-page="insights">
+<div id="site-nav"></div>
+<main>
+
+<section class="page-hero">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb"><a href="index.html">Home</a><span>/</span><span>Insights</span></nav>
+    <div class="page-hero-eyebrow anim-scale-in">TECHNICAL INSIGHTS</div>
+    <h1>WordPress, SEO &amp; Performance Engineering</h1>
+    <p class="hero-desc">Practical technical articles on WordPress development, technical SEO, Core Web Vitals, performance optimization and full-stack web engineering — written from real project experience.</p>
+  </div>
+</section>
+
+<!-- TOPICS -->
+<section style="background:var(--gray-50)">
+  <div class="container">
+    <p class="label section-label">TOPICS COVERED</p>
+    <h2 class="section-title">What You'll Find Here</h2>
+    <div class="grid-4">
+      <div class="card fade-up anim-fade-up stagger-child spotlight-card" style="text-align:center">
+        <div style="font-size:1.75rem;margin-bottom:.75rem">⚙️</div>
+        <h3 style="font-size:.95rem">WordPress Development</h3>
+        <p style="font-size:.82rem">Custom themes, plugins, CPTs, Gutenberg, ACF Pro, Meta Box and WordPress architecture.</p>
+      </div>
+      <div class="card fade-up anim-fade-up stagger-child spotlight-card" style="text-align:center">
+        <div style="font-size:1.75rem;margin-bottom:.75rem">🔍</div>
+        <h3 style="font-size:.95rem">Technical SEO</h3>
+        <p style="font-size:.82rem">Crawlability, indexability, structured data, Core Web Vitals and SEO-preserving migrations.</p>
+      </div>
+      <div class="card fade-up anim-fade-up stagger-child spotlight-card" style="text-align:center">
+        <div style="font-size:1.75rem;margin-bottom:.75rem">⚡</div>
+        <h3 style="font-size:.95rem">Performance</h3>
+        <p style="font-size:.82rem">Caching, database optimization, asset optimization, CDN and PageSpeed improvements.</p>
+      </div>
+      <div class="card fade-up anim-fade-up stagger-child spotlight-card" style="text-align:center">
+        <div style="font-size:1.75rem;margin-bottom:.75rem">🚀</div>
+        <h3 style="font-size:.95rem">Headless WordPress</h3>
+        <p style="font-size:.82rem">React.js, GraphQL, REST API and decoupled WordPress architecture patterns.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLANNED ARTICLES -->
+<section>
+  <div class="container">
+    <p class="label section-label">UPCOMING ARTICLES</p>
+    <h2 class="section-title">Technical Articles in Progress</h2>
+    <p class="section-sub">Articles are written from real project experience — not generic tutorials. Publishing soon.</p>
+    <div class="grid-3">
+
+      <div class="article-card fade-up anim-scale-in stagger-child">
+        <div class="article-thumb" style="background:linear-gradient(135deg,#0d9488,#1d4ed8)">Technical SEO Audit</div>
+        <div class="article-body">
+          <div class="article-cat">Technical SEO</div>
+          <h3>How to Conduct a Technical SEO Audit on a WordPress Website</h3>
+          <p>A practical walkthrough of crawlability, indexability, structured data, Core Web Vitals and canonicalization using Screaming Frog and Search Console.</p>
+          <span class="coming-soon">📝 Coming Soon</span>
+        </div>
+      </div>
+
+      <div class="article-card fade-up anim-scale-in stagger-child">
+        <div class="article-thumb" style="background:linear-gradient(135deg,#7c3aed,#0d9488)">Headless WordPress</div>
+        <div class="article-body">
+          <div class="article-cat">Headless WordPress</div>
+          <h3>Building a Headless WordPress Site with React.js and GraphQL</h3>
+          <p>Architecture decisions, GraphQL endpoint setup, React.js frontend integration and AWS deployment for a production headless WordPress platform.</p>
+          <span class="coming-soon">📝 Coming Soon</span>
+        </div>
+      </div>
+
+      <div class="article-card fade-up anim-scale-in stagger-child">
+        <div class="article-thumb" style="background:linear-gradient(135deg,#16a34a,#0d9488)">Core Web Vitals</div>
+        <div class="article-body">
+          <div class="article-cat">Performance</div>
+          <h3>Improving Core Web Vitals on WordPress: LCP, CLS and INP</h3>
+          <p>Practical techniques for improving Largest Contentful Paint, Cumulative Layout Shift and Interaction to Next Paint on WordPress platforms.</p>
+          <span class="coming-soon">📝 Coming Soon</span>
+        </div>
+      </div>
+
+      <div class="article-card fade-up anim-scale-in stagger-child">
+        <div class="article-thumb" style="background:linear-gradient(135deg,#1d4ed8,#7c3aed)">Drupal to WordPress</div>
+        <div class="article-body">
+          <div class="article-cat">CMS Migration</div>
+          <h3>Migrating from Drupal to WordPress Without Losing SEO</h3>
+          <p>Content mapping, URL mapping, metadata preservation, 301 redirect strategy and post-migration crawl validation from real enterprise migrations.</p>
+          <span class="coming-soon">📝 Coming Soon</span>
+        </div>
+      </div>
+
+      <div class="article-card fade-up anim-scale-in stagger-child">
+        <div class="article-thumb" style="background:linear-gradient(135deg,#0d9488,#16a34a)">Custom WordPress Plugins</div>
+        <div class="article-body">
+          <div class="article-cat">WordPress Development</div>
+          <h3>Building Custom WordPress Plugins with OOP PHP and WordPress APIs</h3>
+          <p>Plugin architecture, OOP PHP patterns, WordPress hooks, REST API endpoints and publishing to the WordPress Plugin Directory.</p>
+          <span class="coming-soon">📝 Coming Soon</span>
+        </div>
+      </div>
+
+      <div class="article-card fade-up anim-scale-in stagger-child">
+        <div class="article-thumb" style="background:linear-gradient(135deg,#7c3aed,#1d4ed8)">WordPress Performance</div>
+        <div class="article-body">
+          <div class="article-cat">Performance</div>
+          <h3>WordPress Database Optimization: Queries, Caching and Redis</h3>
+          <p>Identifying slow queries, implementing object caching with Redis, optimizing database tables and measuring the impact on PageSpeed scores.</p>
+          <span class="coming-soon">📝 Coming Soon</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER / NOTIFY -->
+<section style="background:var(--gray-50)">
+  <div class="container" style="max-width:640px;text-align:center">
+    <p class="label section-label" style="text-align:center">STAY UPDATED</p>
+    <h2 class="section-title">Get Notified When Articles Publish</h2>
+    <p style="margin-bottom:2rem">Practical technical content on WordPress, SEO and performance — no spam, no fluff.</p>
+    <form style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center" onsubmit="event.preventDefault();this.querySelector('button').textContent='Subscribed ✓';this.querySelector('button').style.background='var(--green)'">
+      <input type="email" placeholder="your@email.com" required style="flex:1;min-width:220px;padding:.75rem 1rem;border:1px solid var(--gray-200);border-radius:var(--radius-sm);font-family:var(--font-body);font-size:.9rem;outline:none" onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='var(--gray-200)'">
+      <button type="submit" class="btn btn-primary">Notify Me</button>
+    </form>
+  </div>
+</section>
+
+<section class="cta-dark">
+  <div class="container">
+    <p class="label" style="color:var(--teal);margin-bottom:.75rem">WORK WITH ME</p>
+    <h2>Need a WordPress Developer Who Understands SEO &amp; Performance?</h2>
+    <p>Let's build something technically strong, fast and search-engine ready.</p>
+    <div class="cta-actions">
+      <a href="contact.html" class="btn btn-primary">Start a Project</a>
+      <a href="works.html" class="btn btn-white">View My Work</a>
+    </div>
+  </div>
+</section>
+</main>
+<div id="site-footer"></div>
+<script src="assets/js/shared.js"></script>
+</body>
+</html>
